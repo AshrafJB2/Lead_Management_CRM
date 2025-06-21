@@ -27,4 +27,8 @@ const userSchema = new mongoose.Schema({
 });
 
 
+userSchema.methods.comparePassword = function (password) {
+  return password === this.password;
+};
+
 export const User = mongoose.model('User', userSchema);

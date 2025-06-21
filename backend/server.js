@@ -1,5 +1,7 @@
 import express from 'express';
 import {managersRouter} from "./routes/managers.routes.js";
+import { AuthRouter } from "./routes/auth.routes.js";
+import { User } from './models/user.model.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -13,6 +15,7 @@ mongoose.connect(process.env.MONGO_URL)
 .catch((err) => console.error('MongoDB connection error:', err));
 
 app.use('/managers', managersRouter)
+app.use('/api', AuthRouter);
 
 
 app.listen(PORT, () => {
