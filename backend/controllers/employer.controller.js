@@ -1,4 +1,4 @@
-import { Lead } from '../models/lead.model.js';
+import { Lead } from '../models/leads.model.js';
 import { User } from '../models/user.model.js';
 
 export const getDashboardStats = async (req, res) => {
@@ -56,16 +56,17 @@ export const deleteManager = async (req, res) => {
 
 
 
-import { Lead } from '../models/lead.model.js';
-
 export const getLeads = async (req, res) => {
   const { managerId, status } = req.query;
+
   const filter = {};
-  if (managerId) filter.managerId = managerId;
+  if (managerId) filter.manager = managerId;
   if (status) filter.status = status;
-  const leads = await Lead.find(filter).populate('managerId', 'name email');
+
+  const leads = await Lead.find(filter).populate('manager', 'name email');
   res.json(leads);
 };
+
 
 export const createLead = async (req, res) => {
   const { contactName, contactEmail, companyName, status = "PENDING", manager } = req.body;

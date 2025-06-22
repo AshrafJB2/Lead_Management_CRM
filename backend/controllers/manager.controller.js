@@ -1,4 +1,4 @@
-import {Lead} from "../models/leads.model"
+import { Lead } from '../models/leads.model.js';
 
 export const getAssignedLeads = async (req, res) => {
     const managerId = req.user.id;
@@ -15,7 +15,7 @@ export const updateLeadByManager = async (req, res) => {
   const lead = await Lead.findById(leadId);
   if (!lead) return res.status(404).json({ error: 'Lead not found' });
 
-  if (lead.managerId.toString() !== managerId)
+  if (lead.manager.toString() !== managerId)
     return res.status(403).json({ error: 'Access denied: Not your lead' });
 
 

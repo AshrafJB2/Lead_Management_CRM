@@ -4,8 +4,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "nodemon server.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "setupFilesAfterEnv": ["./tests/setup.js"]
   },
   "keywords": [],
   "author": "",
@@ -18,5 +23,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.0",
     "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }
+

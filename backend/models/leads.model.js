@@ -23,9 +23,10 @@ const leadSchema = new mongoose.Schema({
     ref: 'User',
     required: false
   },
-  notes : {
-    type: String,
-  }
+  notes: {
+    type: [String],
+    default: []
+  },
 }, {
   timestamps: true
 });
