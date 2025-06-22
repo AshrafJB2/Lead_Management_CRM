@@ -1,7 +1,14 @@
 import { Router } from "express";
-import { getDashboardStats,createLead,updateLead,deleteLead,getLeads,getManagers,createManager,updateManager,deleteManager } from "../controllers/employer.controller";
+import { authenticate } from '../middleware/auth.middleware.js';
+import { requireRole } from '../middleware/role.middleware.js';
+import { getDashboardStats,createLead,updateLead,
+    deleteLead,getLeads,getManagers,createManager,
+    updateManager,deleteManager } from "../controllers/employer.controller";
 
 const router = Router();
+
+router.use(authenticate);
+router.use(requireRole('employer'));
 
 router.get('/dashboard-stats', getDashboardStats);
 

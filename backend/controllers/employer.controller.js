@@ -45,22 +45,25 @@ export const updateManager = async (req, res) => {
   const { name, email, password } = req.body;
   const updates = { name, email };
   if (password) updates.password = password;
-  const updated = await User.findByIdAndUpdate(req.params.manager, updates, { new: true });
+  const updated = await User.findByIdAndUpdate(req.params.managerId, updates, { new: true });
   res.json(updated);
 };
 
 export const deleteManager = async (req, res) => {
-  await User.findByIdAndDelete(req.params.manager);
+  await User.findByIdAndDelete(req.params.managerId);
   res.json({ message: 'Manager deleted' });
 };
 
 
+
+import { Lead } from '../models/lead.model.js';
+
 export const getLeads = async (req, res) => {
-  const { manager, status } = req.query;
+  const { managerId, status } = req.query;
   const filter = {};
-  if (manager) filter.manager = manager;
+  if (managerId) filter.managerId = managerId;
   if (status) filter.status = status;
-  const leads = await Lead.find(filter).populate('manager', 'name email');
+  const leads = await Lead.find(filter).populate('managerId', 'name email');
   res.json(leads);
 };
 

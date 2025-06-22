@@ -22,6 +22,9 @@ const leadSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: false
+  },
+  notes : {
+    type: String,
   }
 }, {
   timestamps: true
